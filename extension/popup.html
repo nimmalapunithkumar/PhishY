@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhishY Extension</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>PhishY</h2>
+        <div class="result glow-button" id="urlResult">
+            <!-- URL classification result will appear here -->
+        </div>
+        <div class="input-box">
+            <label for="textInput">Enter Email/SMS Text:</label><br>
+            <textarea id="textInput" name="textInput" rows="4" cols="50"></textarea><br><br>
+            <button class="glow-button" onclick="classifyText()">Classify Text</button>
+        </div>
+        <hr>
+        <div class="result" id="textResult">
+            <!-- Email/SMS text classification result will appear here -->
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

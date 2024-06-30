@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishY</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>PhishY</h2>
+
+        <div class="result glow-button" id="urlResult">
+            <!-- URL classification result will appear here -->
+        </div>
+
+        <div class="input-box">
+            <label for="textInput">Enter Email/SMS Text:</label><br>
+            <textarea id="textInput" name="textInput" rows="4" cols="50"></textarea><br><br>
+            <button class="glow-button" onclick="classifyText()">Classify Text</button>
+        </div>
+
+        <hr>
+
+        <div class="result" id="textResult">
+            <!-- Email/SMS text classification result will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function classifyURL() {
+            fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: window.location.href })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("urlResult").innerHTML = `<p>${data.url_result}</p>`;
+            })
+            .catch(error => console.error('Error fetching URL:', error));
+        }
+
+        function classifyText() {
+            var text = document.getElementById("textInput").value;
+            fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("textResult").innerHTML = `<p>${data.text_result}</p>`;
+            })
+            .catch(error => console.error('Error classifying text:', error));
+        }
+
+        // Automatically classify the current URL and display above text input on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            classifyURL(); // Classify the current URL
+        });
+    </script>
+</body>
+</html>
