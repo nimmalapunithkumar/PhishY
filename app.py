@@ -1,10 +1,12 @@
-# app.py
-
 from flask import Flask, request, jsonify, render_template
+from threading import Thread
 from pipeline import URLClassifier
 
 app = Flask(__name__)
 classifier = URLClassifier()
+
+def start_flask_app():
+    app.run(debug=True, use_reloader=False)  # Set use_reloader=False to avoid threading issues
 
 # Home route to render the HTML form
 @app.route('/')
@@ -31,4 +33,5 @@ def classify():
     return jsonify({'url_result': result, 'text_result': text_result})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Start Flask app in a separate thread
+    Thread(target=start_flask_app).start()

@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhishY Extension</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h2>PhishY</h2>
+
         <div class="result glow-button" id="urlResult">
             <!-- URL classification result will appear here -->
         </div>
+
+        <div class="result" id="currentUrl">
+            <!-- Current URL will be shown here -->
+        </div>
+
         <div class="input-box">
             <label for="textInput">Enter Email/SMS Text:</label><br>
             <textarea id="textInput" name="textInput" rows="4" cols="50"></textarea><br><br>
-            <button class="glow-button" onclick="classifyText()">Classify Text</button>
+            <button class="glow-button" id="classifyTextBtn">Classify Text</button>
         </div>
+
         <hr>
+
         <div class="result" id="textResult">
             <!-- Email/SMS text classification result will appear here -->
         </div>
     </div>
+
     <script src="popup.js"></script>
 </body>
 </html>

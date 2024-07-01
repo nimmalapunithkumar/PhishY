@@ -1,3 +1,3 @@
-chrome.runtime.onInstalled.addListener(function() {
-    console.log('PhishY Extension installed');
+chrome.runtime.onInstalled.addListener(() => {
+    console.log("PhishY Extension installed.");
 });
